@@ -1,0 +1,58 @@
+{
+    "name": "${localWorkspaceFolderBasename}",
+    "image": "mcr.microsoft.com/devcontainers/python:3.12-bullseye",
+    "features": {
+        "ghcr.io/va-h/devcontainers-features/uv:1": {}
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "charliermarsh.ruff",
+                "codezombiech.gitignore",
+                "eamodio.gitlens",
+                "exiasr.hadolint",
+                "kevinrose.vsc-python-indent",
+                "mosapride.zenkaku",
+                "ms-azuretools.vscode-docker",
+                "ms-python.python",
+                "njpwerner.autodocstring",
+                "oderwat.indent-rainbow",
+                "pkief.material-icon-theme",
+                "shardulm94.trailing-spaces",
+                "usernamehw.errorlens",
+                "yzhang.markdown-all-in-one",
+                "mechatroner.rainbow-csv",
+                "ms-toolsai.jupyter",
+                "ckolkman.vscode-postgres"
+            ],
+            "settings": {
+                "python.defaultInterpreterPath": "/root/.local/share/uv/python",
+                "[python]": {
+                    "editor.defaultFormatter": "charliermarsh.ruff",
+                    "editor.codeActionsOnSave": {
+                        "source.fixAll.ruff": "explicit",
+                        "source.organizeImports.ruff": "explicit"
+                    },
+                    "editor.formatOnSave": true
+                },
+                "files.insertFinalNewline": true,
+                "files.trimTrailingWhitespace": true,
+                "terminal.integrated.defaultProfile.linux": "zsh",
+                "terminal.integrated.profiles.linux": {
+                    "zsh": {
+                        "path": "/bin/zsh"
+                    }
+                }
+            }
+        }
+    },
+    "remoteUser": "vscode",
+    "containerEnv": {
+        "PYTHONPATH": "/workspaces/${localWorkspaceFolderBasename}/src",
+        "UV_LINK_MODE": "copy",
+        "PMIP_CBC_LIBRARY": "/usr/local/lib/libCbc.so",
+        "LD_LIBRARY_PATH": "/home/haroldo/prog/lib"
+    },
+    "postCreateCommand": "bash .devcontainer/post_create.sh",
+    "postAttachCommand": "bash .devcontainer/post_attach.sh"
+}
