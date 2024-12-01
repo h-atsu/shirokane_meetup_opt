@@ -9,7 +9,7 @@ from consts import ROOT
 
 # %%
 # DATA_DIR = ROOT / "data" / "small_dataset"
-DATA_DIR = ROOT / "data" / "medium_dataset"
+DATA_DIR = ROOT / "data" / "raw_data_from_book" / "small_dataset"
 
 df_locations = pl.read_csv(DATA_DIR / "locations.csv")
 print(len(df_locations))
