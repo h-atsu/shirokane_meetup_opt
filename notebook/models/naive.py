@@ -120,7 +120,11 @@ for d in D:
 
 for d in D:
     for k in K:
-        u[d, k] = model.add_integer_variable(lb=0, name=f"u_{d}_{k}")
+        if k == "p":
+            u[d, k] = model.add_integer_variable(lb=0, ub=0, name=f"u_{d}_{k}")
+        else:
+            u[d, k] = model.add_integer_variable(lb=1, ub=len(K) - 1, name=f"u_{d}_{k}")
+
 
 for d in D:
     for r in R:

@@ -46,11 +46,16 @@ class DailyData(BaseModel):
     """
 
     list_delivery_route: list[StoreData]  # 自社配送のルート
-    total_weight: float  # 配送重量
-    total_move_time: float  # 移動時間
-    over_time: float  # 残業時間
-    over_time_cost: float  # 残業時間コスト
-    outsourcintg_cost: float  # 外注費用
+    daily_total_weight: float  # 配送重量
+    daily_overtime: float  # 一日の残業時間
+    daily_overtime_cost: float  # 一日の残業時間コスト
+    daily_move_time: float  # 移動時間
+
+
+class DeliveryStatusData(BaseModel):
+    delivered_date: int | None  # 配送日
+    outsourced_flag: bool  # 外注フラグ
+    outsourcing_cost: float | None  # 外注費用
 
 
 class OutputData(BaseModel):
@@ -59,5 +64,11 @@ class OutputData(BaseModel):
     """
 
     date2daily_data: dict[int, DailyData]  # 配送日から1日分の配送結果データへの変換
-    total_over_time_cost: float  # 総残業時間コスト
+    order_name2delivery_status_data: dict[
+        str, DeliveryStatusData
+    ]  # 配送注文名から配送状況のデータへの変換
+    total_overtime: float  # 総残業時間
+    total_overtime_cost: float  # 総残業時間コスト
     total_outsourcing_cost: float  # 総外注費用
+    total_cost: float  # 総費用
+    total_move_time: float  # 総移動時間

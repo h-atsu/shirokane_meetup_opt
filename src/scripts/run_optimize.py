@@ -14,7 +14,7 @@ from write_output_data import write_output_data
 def main(config_data: ConfigData):
     # output
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    output_dir = ROOT / "data" / "outputs" / f"{config_data.dataset_name}_{timestamp}"
+    output_dir = ROOT / "data" / "outputs" / f"{timestamp}"
 
     # 入力データの読み込み
     input_data = make_input_data(config_data.dataset_name)
@@ -23,7 +23,7 @@ def main(config_data: ConfigData):
     output_data = execute_model(input_data, config_data)
 
     # 出力データをエクセルに書き込み
-    write_output_data(output_data, output_dir)
+    write_output_data(input_data, config_data, output_data, output_dir)
 
 
 if __name__ == "__main__":
