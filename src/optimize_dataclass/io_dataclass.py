@@ -29,12 +29,13 @@ class InputData(BaseModel):
     最適化入力クラス
     """
 
-    list_derivery_date: list[int]  # 配送日のリスト
+    list_delivery_date: list[int]  # 配送日のリスト
     list_order_name: list[str]  # 配送注文名のリスト
     order_name2data: dict[str, OrderData]  # 配送注文名からデータへの変換
-    list_store_name: list[str]  # 店舗名のリスト
-    store_name2data: list[StoreData]  # 店舗名から店舗データへの変換
-    depot_data = StoreData  # 配送センター(デポ)のデータ
+    list_store_name: list[str]  # デポを除く店舗名のリスト
+    store_name2data: dict[str, StoreData]  # デポを除く店舗名から店舗データへの変換
+    depot_data: StoreData  # デポ(配送センター)のデータ
+    list_store_and_depot_data: list[StoreData]  # 店舗とデポのデータリスト
     move_time_matrix: dict[tuple[str, str], float]  # 店舗間の移動時間
 
 
