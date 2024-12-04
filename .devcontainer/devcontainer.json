@@ -22,7 +22,8 @@
                 "usernamehw.errorlens",
                 "yzhang.markdown-all-in-one",
                 "mechatroner.rainbow-csv",
-                "ms-toolsai.jupyter"
+                "ms-toolsai.jupyter",
+                "GrapeCity.gc-excelviewer"
             ],
             "settings": {
                 "python.defaultInterpreterPath": "/root/.local/share/uv/python",
