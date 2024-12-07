@@ -1,7 +1,10 @@
 from abc import ABC, abstractmethod
+from typing import TypeVar
 
 from consts import SolutionStatus
 from optimize_dataclass.io_dataclass import OutputData
+
+T = TypeVar("T")
 
 
 class BaseModel(ABC):
@@ -10,15 +13,15 @@ class BaseModel(ABC):
         self.config = optimize_config_data
 
     @abstractmethod
-    def add_variables(self):
+    def add_variables(self: T) -> T:
         pass
 
     @abstractmethod
-    def add_constraints(self):
+    def add_constraints(self: T) -> T:
         pass
 
     @abstractmethod
-    def add_objectives(self):
+    def add_objectives(self: T) -> T:
         pass
 
     @abstractmethod
