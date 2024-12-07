@@ -81,9 +81,13 @@ def write_output_data(
         for sheet_name, df in outputs.items():
             df.write_excel(workbook=wb, worksheet=sheet_name)
 
-    # input_data, output_dataをjsonで保存
+    # input_dataをjsonで保存
     with open(ROOT / output_dir / "input_data.json", "w") as f:
         json.dump(input_data.model_dump(mode="json"), f, ensure_ascii=False, indent=4)
+    # config_dataをjsonで保存
+    with open(ROOT / output_dir / "config_data.json", "w") as f:
+        json.dump(config_data.model_dump(mode="json"), f, ensure_ascii=False, indent=4)
 
+    # output_dataをjsonで保存
     with open(ROOT / output_dir / "output_data.json", "w") as f:
         json.dump(output_data.model_dump(mode="json"), f, ensure_ascii=False, indent=4)
