@@ -1,7 +1,7 @@
 import polars as pl
 
 from consts import ROOT
-from loader import load_distances_mst, load_locations_mst, load_orders
+from data_processor.loader import load_distances_mst, load_locations_mst, load_orders
 from optimize_dataclass.io_dataclass import InputData, OrderData, StoreData
 
 

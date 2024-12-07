@@ -1,14 +1,14 @@
 from datetime import datetime
 
 from consts import ROOT
+from data_processor.make_input_data import make_input_data
+from data_processor.write_output_data import write_output_data
 from execute_model import execute_model
-from make_input_data import make_input_data
 from optimize_dataclass.config_dataclass import (
     ConfigData,
     ConstraintData,
     ObjectiveData,
 )
-from write_output_data import write_output_data
 
 
 def main(config_data: ConfigData):

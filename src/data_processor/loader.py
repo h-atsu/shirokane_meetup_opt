@@ -4,7 +4,7 @@ import pandera.polars as pa
 import polars as pl
 from pandera.typing import DataFrame
 
-from schema import DistanceSchema, LocationsSchema, OrdersSchema
+from data_processor.schema import DistanceSchema, LocationsSchema, OrdersSchema
 
 
 @pa.check_types

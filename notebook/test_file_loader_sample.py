@@ -2,7 +2,7 @@
 from IPython.display import display
 
 from consts import ROOT
-from loader import load_distances_mst, load_locations_mst, load_orders
+from data_processor.loader import load_distances_mst, load_locations_mst, load_orders
 
 # %%
 DATA_PATH = ROOT / "data" / "raw" / "medium_dataset.xlsx"
