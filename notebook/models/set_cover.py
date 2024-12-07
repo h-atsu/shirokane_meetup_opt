@@ -10,7 +10,7 @@ from consts import ROOT
 
 # %%
 # DATA_DIR = ROOT / "data" / "small_dataset"
-DATA_DIR = ROOT / "data" / "medium_dataset"
+DATA_DIR = ROOT / "data" / "raw_data_from_book" / "small_dataset"
 
 df_locations = pl.read_csv(DATA_DIR / "locations.csv")
 print(len(df_locations))
@@ -248,13 +248,6 @@ for d in D:
         Q2X[q] = X
 print("配送日1日目の配送パターン:", D2Q[1])
 
-# %%
-q = "q_1_20"
-print("対象となる配送パターンの識別子:", q)
-print("荷物のリスト:", Q2R[q])
-print("移動時間:", Q2T[q])
-print("残業時間:", Q2H[q])
-print("配送ルート:", Q2X[q])
 
 # %% [markdown]
 # ### ★「配送パターンを利用した数理モデル」の実装

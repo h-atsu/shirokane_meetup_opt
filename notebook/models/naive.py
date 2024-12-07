@@ -9,7 +9,7 @@ from consts import ROOT
 
 # %%
 # DATA_DIR = ROOT / "data" / "small_dataset"
-DATA_DIR = ROOT / "data" / "medium_dataset"
+DATA_DIR = ROOT / "data" / "raw_data_from_book" / "small_dataset"
 
 df_locations = pl.read_csv(DATA_DIR / "locations.csv")
 print(len(df_locations))
@@ -120,7 +120,11 @@ for d in D:
 
 for d in D:
     for k in K:
-        u[d, k] = model.add_integer_variable(lb=0, name=f"u_{d}_{k}")
+        if k == "p":
+            u[d, k] = model.add_integer_variable(lb=0, ub=0, name=f"u_{d}_{k}")
+        else:
+            u[d, k] = model.add_integer_variable(lb=1, ub=len(K) - 1, name=f"u_{d}_{k}")
+
 
 for d in D:
     for r in R:
@@ -137,8 +141,8 @@ for d in D:
             sum(x[d, k1, k2] for k2 in K) == sum(x[d, k2, k1] for k2 in K)
         )
 
-    # (A-2) 各配送日について、地点に訪問する数は高々1回まで
-    model.add_linear_constraint(sum([x[d, k2, k1] for k2 in K]) <= 1)
+        # (A-2) 各配送日について、地点に訪問する数は高々1回まで
+        model.add_linear_constraint(sum([x[d, k2, k1] for k2 in K]) <= 1)
 
 for d in D:
     # (B-1) 各配送日について、配送センターは出発地点(0番目に訪問)
@@ -210,7 +214,7 @@ print(
 
 # %%
 for d in D:
-    X = [(k1, k2) for k1 in K for k2 in K if result.variable_values(x[d, k1, k2]) == 1]
+    X = [(k1, k2) for k1 in K for k2 in K if result.variable_values(x[d, k1, k2]) > 0.5]
 
     time = sum([KK2T[k1, k2] for k1, k2 in X])
     print(f"---配送日:{d}日目---")
@@ -235,10 +239,10 @@ for d in D:
 # %%
 for r in R:
     # 自社トラックで配送したかどうかのフラグ
-    owned_truck_flag = sum([result.variable_values(y[d, r]) for d in D])
+    owned_truck_flag = int(sum([result.variable_values(y[d, r]) for d in D]))
     if owned_truck_flag:
         # 配送日の取得
-        tar_d = [d for d in D if result.variable_values(y[d, r]) == 1][0]
+        tar_d = [d for d in D if result.variable_values(y[d, r]) > 0.5][0]
         text = f"荷物{r}(お店{R2S[r]},{R2W[r]}[kg])-配送日:{tar_d}日目"
     else:
         # 外注費用の取得
